@@ -2,17 +2,19 @@
 
 // components/TaskList.js
 import { useState, useEffect } from 'react';
-import { getTasks } from '../controllers/tasks';
+// import { getTasks } from '../controllers/tasks';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const queried = getTasks();
-
-    if (queried.tasks !== undefined) {
-      setTasks(queried.tasks);
-    }
+    fetch("http://localhost:3000/api/tasks", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(res => res.json())
+      .then(({data}) => setTasks(data));
   }, []);
 
   return (
