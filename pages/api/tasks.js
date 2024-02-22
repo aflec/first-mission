@@ -19,6 +19,14 @@ export default async function handler(req, res) {
       "_id": new ObjectId(bodyObject._id)
     });
     res.json({quantidadeDocumentosApagados: deletedReturn.deletedCount});
+  } else if (req.method === 'PUT') {
+    let bodyObject = (req.body);
+    const filter = {
+      "_id": new ObjectId(bodyObject._id)
+    };
+    const update = { $set: {checked: bodyObject.checked} };
+    let myTask = await db.collection("tasks").updateOne(filter, update);
+    res.json(myTask.ops[0]);
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });
   }
