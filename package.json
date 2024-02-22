@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bson": "^6.3.0",
     "mongodb": "^3.5.9",
     "next": "^14.0.5-canary.58",
     "react": "^18",

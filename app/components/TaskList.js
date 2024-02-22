@@ -1,26 +1,22 @@
 'use client'
+const Task = (props) => {
+  return (<li>
+  <button 
+    onClick={function deletar() {
+      props.deletarTarefa(props.task);
+    }}
+    className="m-1 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">X
 
-// components/TaskList.js
-import { useState, useEffect } from 'react';
-// import { getTasks } from '../controllers/tasks';
+  </button>
+  {props.task.text}</li>);
+}
 
-const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/tasks", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(res => res.json())
-      .then(({data}) => setTasks(data));
-  }, []);
-
+const TaskList = (props) => {
   return (
     <ul>
-      {tasks.map((task) => (
-        <li key={task._id}>{task.text}</li>
+      {props.tasks.map((task) => (
+       
+        <Task key={task._id} task={task} deletarTarefa={props.deletarTarefa}/>
       ))}
     </ul>
   );
