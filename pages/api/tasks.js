@@ -25,8 +25,8 @@ export default async function handler(req, res) {
       "_id": new ObjectId(bodyObject._id)
     };
     const update = { $set: {checked: bodyObject.checked} };
-    let myTask = await db.collection("tasks").updateOne(filter, update);
-    res.json(myTask.ops[0]);
+    let updateResult = await db.collection("tasks").updateOne(filter, update);
+    res.json(updateResult);
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });
   }
